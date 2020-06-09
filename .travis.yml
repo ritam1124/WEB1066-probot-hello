@@ -3,9 +3,11 @@ services:
   - docker
 
 env:
+  - NODE_VERSION=8-jessie
+  - NODE_VERSION=10-jessie
   - NPM_TARGET=test
   - NPM_TARGET=lint
-  #- NPM_TARGET=coverage
+  - NPM_TARGET=coverage
 
 
 before_install:
@@ -15,6 +17,7 @@ install:
   - docker build -t probot-hello .
 
 script:
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWD"
   - docker run --rm probot-hello npm run $NPM_TARGET
 
 after_success:
