@@ -3,8 +3,8 @@ services:
   - docker
 
 env:
-  - NODE_VERSION= 8-jessie
-  - NODE_VERSION= 10-jessie
+  - NODE_VERSION=8-jessie
+  - NODE_VERSION=10-jessie
   - NPM_TARGET=test
   - NPM_TARGET=lint
   - NPM_TARGET=coverage
@@ -53,6 +53,7 @@ jobs:
         - NODE_VERSION=8-jessie
         - NPM_TARGET=coverage
 
+      # if: branch = master:
     - stage: npm-targets
       name: "Test 10-jessie"
       install: skip
