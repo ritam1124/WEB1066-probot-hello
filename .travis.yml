@@ -17,8 +17,13 @@ install:
   - docker build -t probot-hello .
 
 script:
-  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWD"
-  - docker run --rm probot-hello npm run $NPM_TARGET
+  - docker login -u="{$DOCKER_USERNAME}" -p="{$DOCKER_PASSWD}"
+  - docker build -t node:$NODE_VERSION --build-arg NODE_IMAGE="node:${NODE_VERSION}" .
+  - docker images
+  - docker tag node:$NODE_VERSION $DOCKER_USERNAME/probot-hello:$NODE_VERSION-$(git rev-parse HEAD)
+  - docker push $DOCKER_USERNAME/probot-hello:$NODE_VERSION-$(git rev-parse HEAD)
+
+
 
 after_success:
   - set -x -v;
