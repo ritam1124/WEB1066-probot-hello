@@ -27,14 +27,3 @@ script:
   stages:
   - test
   - npm-targets
-
-  jobs:
-    include:
-    - stage: npm-targets
-      name: "Test 8-jessie"
-      install: skip
-      script:
-      - docker run -rm $DOCKER_USERNAME/probot-hello:$NODE_VERSION-$(git rev-parse HEAD) npm run $NPM_TARGET
-      env:
-        - NODE_VERSION=8-jessie
-        - NPM_TARGET=test
